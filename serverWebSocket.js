@@ -1,8 +1,9 @@
+require('dotenv').config();
 const { createServer } = require("http");
 const { Server } = require("socket.io");
 const crypto = require("crypto");
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 5000;
 
 const httpServer = createServer();
 

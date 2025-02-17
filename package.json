@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/huy24112001/WebSocket-Server#readme",
   "dependencies": {
+    "dotenv": "^16.4.7",
     "next": "^15.1.7",
     "socket.io": "^4.8.1"
   }
