@@ -1,0 +1,24 @@
+{
+  "name": "websocket-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "serverWebSocket.js",
+  "scripts": {
+    "start": "node serverWebSocket.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/huy24112001/WebSocket-Server.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/huy24112001/WebSocket-Server/issues"
+  },
+  "homepage": "https://github.com/huy24112001/WebSocket-Server#readme",
+  "dependencies": {
+    "next": "^15.1.7",
+    "socket.io": "^4.8.1"
+  }
+}
