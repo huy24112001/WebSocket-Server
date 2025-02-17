@@ -2,7 +2,7 @@ const { createServer } = require("http");
 const { Server } = require("socket.io");
 const crypto = require("crypto");
 
-const PORT = process.env.PORT || 3005;
+const PORT = process.env.PORT || 4000;
 
 const httpServer = createServer();
 

@@ -4,7 +4,8 @@
   "description": "",
   "main": "serverWebSocket.js",
   "scripts": {
-    "start": "node serverWebSocket.js"
+    "start": "node serverWebSocket.js",
+    "build": "node serverWebSocket.js"
   },
   "repository": {
     "type": "git",
