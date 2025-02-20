@@ -24,11 +24,12 @@ io.on("connection", (socket) => {
     console.log("⚡ Client connected:", socket.id);
 
     socket.on("join_game", ({playerName, avatar}) => {
+        console.log(`🎮 Player ${playerName} request join_game`);
         const isDuplicate = playersQueue.some(player => player.id === socket.id || player.name === playerName);
         if (!isDuplicate) {
-            console.log(`🎮 Player ${playerName} ${avatar} (${socket.id}) joined the queue`);
+            console.log(`🎮 Player ${playerName} (${socket.id}) joined the queue`);
             playersQueue.push({id: socket.id, name: playerName, avatar: avatar});
-
+            socket.emit("AddedQueue");
             if (playersQueue.length >= 2) {
                 const player1 = playersQueue.shift();
                 const player2 = playersQueue.shift();
@@ -71,14 +72,14 @@ io.on("connection", (socket) => {
         match.currentPlayer = socket.id === match.player1.id ? match.player2.id : match.player1.id;
         const isTurnP1 = match.currentPlayer === match.player1.id
 
-        console.log(matchID + " " + row);
+        console.log(`🎮(${matchID}) move ${row} ${col}`);
 
         io.to(match.player1.id).emit("move_made", {row: row, col: col, isTurn: isTurnP1});
         io.to(match.player2.id).emit("move_made", {row: row, col: col, isTurn: !isTurnP1});
     });
 
     socket.on("cancel_join_game", () => {
-        console.log(`🎮 Player (${socket.id}) cancel join game`);
+        console.log(`🎮 Player (${socket.id}) emit cancel_join_game`);
         const index = playersQueue.findIndex((p) => p.id === socket.id);
         if (index !== -1) {
             console.log(`🚫 Removing ${playersQueue[index].name} from queue`);
@@ -88,6 +89,7 @@ io.on("connection", (socket) => {
             (m) => m.player1.id === socket.id || m.player2.id === socket.id
         );
         if (matchIndex !== -1) {
+            console.log(`🎮 Player (${socket.id}) leave game`);
             const match = matches[matchIndex];
             const remainingPlayerId = match.player1.id === socket.id ? match.player2.id : match.player1.id;
             io.to(remainingPlayerId).emit("opponent_left");
